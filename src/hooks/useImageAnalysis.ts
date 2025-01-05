@@ -4,11 +4,6 @@ import { generateMidjourneyPrompt } from '../utils/promptGenerator';
 import { ERROR_MESSAGES } from '../utils/errorMessages';
 import { ANALYSIS_PROMPTS } from '../utils/prompts/analysisPrompts';
 
-interface PersonDetails {
-  name: string;
-  gender: string;
-}
-
 export function useImageAnalysis() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -17,8 +12,7 @@ export function useImageAnalysis() {
   const analyzeImages = async (
     poseImage: File | null,
     backgroundImage: File | null,
-    clothingImage: File | null,
-    personDetails: PersonDetails
+    clothingImage: File | null
   ) => {
     try {
       setLoading(true);
@@ -27,8 +21,7 @@ export function useImageAnalysis() {
       const results = {
         pose: '',
         background: '',
-        clothing: '',
-        ...personDetails
+        clothing: ''
       };
 
       if (poseImage) {

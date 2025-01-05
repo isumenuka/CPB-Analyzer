@@ -1,11 +1,12 @@
 import { PromptParts } from './types';
 import { formatPromptParts } from './formatters';
-import { ERROR_MESSAGES } from '../errorMessages';
 
 export function generateMidjourneyPrompt(parts: PromptParts): string {
-  if (!parts.name || !parts.gender) {
-    throw new Error(ERROR_MESSAGES.REQUIRED_FIELDS);
-  }
-
-  return formatPromptParts(parts);
+  const components = [];
+  
+  if (parts.pose) components.push(parts.pose);
+  if (parts.clothing) components.push(parts.clothing);
+  if (parts.background) components.push(parts.background);
+  
+  return components.join(', ');
 }
